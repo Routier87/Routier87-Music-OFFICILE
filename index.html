@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+```
+<title>Routier 87 Music Hub | V9</title>
+
+<!-- Feuille de style principale -->
+<link rel="stylesheet" href="style.css">
+```
+
+</head>
+
+<body>
+
+```
+<!-- ============================= -->
+<!-- FOND ANIMÉ DU SITE -->
+<!-- ============================= -->
+<div class="background">
+    <div class="background-overlay"></div>
+    <div class="light light-1"></div>
+    <div class="light light-2"></div>
+    <div class="light light-3"></div>
+</div>
+
+
+<!-- ============================= -->
+<!-- BARRE DU HAUT -->
+<!-- ============================= -->
+<header class="topbar">
+
+    <div class="logo-area">
+        <div class="logo-icon">R87</div>
+
+        <div class="logo-text">
+            <h1>Routier 87 Music Hub</h1>
+            <span>V9 • Bibliothèque musicale</span>
+        </div>
+    </div>
+
+
+    <div class="topbar-right">
+
+        <div id="currentUserBox" class="current-user-box">
+            <span class="user-status-dot"></span>
+
+            <div>
+                <strong id="currentUserName">Non connecté</strong>
+                <small id="currentUserRole">Veuillez vous connecter</small>
+            </div>
+        </div>
+
+        <button
+            id="logoutButton"
+            class="logout-button"
+            type="button"
+            style="display: none;"
+        >
+            🚪 Déconnexion
+        </button>
+
+    </div>
+
+</header>
+
+
+<!-- ============================= -->
+<!-- ÉCRAN DE CONNEXION -->
+<!-- ============================= -->
+<section id="loginScreen" class="login-screen">
+
+    <div class="login-container">
+
+        <div class="login-logo">
+            🎵
+        </div>
+
+        <p class="small-title">
+            ROUTIER 87 MUSIC HUB
+        </p>
+
+        <h2>Bienvenue</h2>
+
+        <p class="login-description">
+            Connectez-vous à votre bibliothèque musicale personnelle.
+        </p>
+
+
+        <!-- FORMULAIRE -->
+        <form id="loginForm">
+
+            <div class="input-group">
+
+                <label for="loginUsername">
+                    👤 Identifiant
+                </label>
+
+                <input
+                    type="text"
+                    id="loginUsername"
+                    placeholder="Entrez votre identifiant"
+                    autocomplete="username"
+                    required
+                >
+
+            </div>
+
+
+            <div class="input-group">
+
+                <label for="loginPassword">
+                    🔒 Mot de passe
+                </label>
+
+                <div class="password-wrapper">
+
+                    <input
+                        type="password"
+                        id="loginPassword"
+                        placeholder="Entrez votre mot de passe"
+                        autocomplete="current-password"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        id="togglePassword"
+                        class="toggle-password"
+                        title="Afficher ou masquer le mot de passe"
+                    >
+                        👁️
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <p id="loginMessage" class="login-message"></p>
+
+
+            <button
+                type="submit"
+                class="login-button"
+            >
+                🔓 Se connecter
+            </button>
+
+        </form>
+
+
+        <div class="login-footer">
+
+            <p>
+                🎧 Accédez à vos musiques, commentaires et réactions.
+            </p>
+
+            <small>
+                Routier 87 Music Hub • V9
+            </small>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ============================= -->
+<!-- APPLICATION PRINCIPALE -->
+<!-- ============================= -->
+<div id="app" class="app" style="display: none;">
+
+
+    <!-- ============================= -->
+    <!-- MENU LATÉRAL -->
+    <!-- ============================= -->
+    <aside class="sidebar">
+
+
+        <div class="sidebar-header">
+
+            <p class="sidebar-small-title">
+                UTILISATEURS
+            </p>
+
+            <h2>Bibliothèques</h2>
+
+            <p>
+                Choisissez un profil pour afficher ses musiques.
+            </p>
+
+        </div>
+
+
+        <!-- Liste générée automatiquement par JavaScript -->
+        <div
+            id="profilesList"
+            class="profiles-list"
+        >
+        </div>
+
+
+        <div class="sidebar-bottom">
+
+            <div class="sidebar-info">
+
+                <span class="sidebar-info-icon">
+                    💡
+                </span>
+
+                <p>
+                    Les fichiers MP3 sont placés dans le dossier
+                    <strong>musique</strong>.
+                </p>
+
+            </div>
+
+
+            <div class="sidebar-info">
+
+                <span class="sidebar-info-icon">
+                    🖼️
+                </span>
+
+                <p>
+                    Les pochettes sont placées dans le dossier
+                    <strong>images</strong>.
+                </p>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ============================= -->
+    <!-- CONTENU PRINCIPAL -->
+    <!-- ============================= -->
+    <main class="main-content">
+
+
+        <!-- ============================= -->
+        <!-- EN-TÊTE DU PROFIL -->
+        <!-- ============================= -->
+        <section class="profile-hero">
+
+            <div class="profile-hero-left">
+
+                <p class="section-label">
+                    BIBLIOTHÈQUE MUSICALE
+                </p>
+
+                <h2 id="selectedProfileName">
+                    Bienvenue
+                </h2>
+
+                <p id="selectedProfileDescription">
+                    Sélectionnez un profil pour afficher sa bibliothèque musicale.
+                </p>
+
+            </div>
+
+
+            <div class="profile-hero-right">
+
+                <div class="search-box">
+
+                    <span>
+                        🔎
+                    </span>
+
+                    <input
+                        type="text"
+                        id="musicSearch"
+                        placeholder="Rechercher une musique..."
+                        autocomplete="off"
+                    >
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ============================= -->
+        <!-- PANNEAU CRÉATEUR -->
+        <!-- Visible uniquement pour Routier 87 -->
+        <!-- ============================= -->
+        <section
+            id="creatorPanel"
+            class="creator-panel"
+            style="display: none;"
+        >
+
+            <div class="creator-panel-top">
+
+                <div class="creator-title">
+
+                    <div class="creator-crown">
+                        👑
+                    </div>
+
+                    <div>
+
+                        <p class="section-label">
+                            PANNEAU DU CRÉATEUR
+                        </p>
+
+                        <h2>
+                            Routier 87
+                        </h2>
+
+                        <p>
+                            Statistiques générales et activité de votre Music Hub.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="creator-badge">
+                    👑 FONDATEUR
+                </div>
+
+            </div>
+
+
+            <!-- STATISTIQUES -->
+            <div class="stats-grid">
+
+
+                <div class="stat-card">
+
+                    <span class="stat-icon">
+                        🎵
+                    </span>
+
+                    <div>
+
+                        <strong id="totalTracks">
+                            0
+                        </strong>
+
+                        <span>
+                            Musiques
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <span class="stat-icon">
+                        👍
+                    </span>
+
+                    <div>
+
+                        <strong id="totalLikes">
+                            0
+                        </strong>
+
+                        <span>
+                            J'aime
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <span class="stat-icon">
+                        💬
+                    </span>
+
+                    <div>
+
+                        <strong id="totalComments">
+                            0
+                        </strong>
+
+                        <span>
+                            Commentaires
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <span class="stat-icon">
+                        ⬇️
+                    </span>
+
+                    <div>
+
+                        <strong id="totalDownloads">
+                            0
+                        </strong>
+
+                        <span>
+                            Téléchargements
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- ACTIVITÉ -->
+            <div class="creator-activity">
+
+                <div class="creator-activity-header">
+
+                    <h3>
+                        📋 Activité récente
+                    </h3>
+
+                    <span>
+                        Toutes les actions enregistrées
+                    </span>
+
+                </div>
+
+
+                <div
+                    id="activityList"
+                    class="activity-list"
+                >
+
+                    <p class="no-activity">
+                        Aucune activité pour le moment.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- INFORMATION SUR LE FONCTIONNEMENT -->
+            <div class="creator-help">
+
+                <h3>
+                    🎵 Ajouter une nouvelle musique
+                </h3>
+
+                <p>
+                    Pour ajouter une musique à un profil, placez votre fichier MP3
+                    dans le dossier <strong>musique/</strong>, puis ajoutez ses
+                    informations dans la liste <strong>MUSIC</strong> du fichier
+                    <strong>script.js</strong>.
+                </p>
+
+                <p>
+                    Pour ajouter une pochette, placez votre image dans le dossier
+                    <strong>images/</strong>.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ============================= -->
+        <!-- TITRE DES MUSIQUES -->
+        <!-- ============================= -->
+        <section class="music-section">
+
+            <div class="music-section-header">
+
+                <div>
+
+                    <p class="section-label">
+                        COLLECTION
+                    </p>
+
+                    <h2 id="musicSectionTitle">
+                        Mes musiques
+                    </h2>
+
+                </div>
+
+
+                <span
+                    id="musicCounter"
+                    class="music-counter"
+                >
+                    0 musique
+                </span>
+
+            </div>
+
+
+            <!-- ============================= -->
+            <!-- GRILLE DES MUSIQUES -->
+            <!-- Générée par JavaScript -->
+            <!-- ============================= -->
+            <div
+                id="musicGrid"
+                class="music-grid"
+            >
+            </div>
+
+
+            <!-- AUCUNE MUSIQUE -->
+            <div
+                id="emptyMusic"
+                class="empty-music"
+                style="display: none;"
+            >
+
+                <div class="empty-icon">
+                    🎵
+                </div>
+
+                <h3>
+                    Aucune musique disponible
+                </h3>
+
+                <p>
+                    Aucune musique n'a encore été ajoutée à cette bibliothèque.
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- ============================= -->
+<!-- LECTEUR AUDIO FIXE -->
+<!-- ============================= -->
+<section
+    id="playerBar"
+    class="player-bar"
+    style="display: none;"
+>
+
+    <div class="player-info">
+
+        <div
+            id="playerCover"
+            class="player-cover"
+        >
+            🎵
+        </div>
+
+        <div class="player-text">
+
+            <strong id="playerTitle">
+                Aucune musique
+            </strong>
+
+            <span id="playerArtist">
+                Routier 87 Music Hub
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="player-main">
+
+        <audio
+            id="audioPlayer"
+            preload="metadata"
+        >
+        </audio>
+
+
+        <div class="player-controls">
+
+            <button
+                id="previousButton"
+                type="button"
+                class="player-button"
+                title="Musique précédente"
+            >
+                ⏮️
+            </button>
+
+
+            <button
+                id="playPauseButton"
+                type="button"
+                class="player-play-button"
+                title="Lecture"
+            >
+                ▶️
+            </button>
+
+
+            <button
+                id="nextButton"
+                type="button"
+                class="player-button"
+                title="Musique suivante"
+            >
+                ⏭️
+            </button>
+
+        </div>
+
+
+        <div class="progress-container">
+
+            <span id="currentTime">
+                0:00
+            </span>
+
+            <input
+                type="range"
+                id="progressBar"
+                min="0"
+                max="100"
+                value="0"
+            >
+
+            <span id="duration">
+                0:00
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="player-volume">
+
+        <span>
+            🔊
+        </span>
+
+        <input
+            type="range"
+            id="volumeBar"
+            min="0"
+            max="100"
+            value="80"
+        >
+
+    </div>
+
+</section>
+
+
+<!-- ============================= -->
+<!-- FENÊTRE DES COMMENTAIRES -->
+<!-- ============================= -->
+<div
+    id="commentsModal"
+    class="modal-overlay"
+    style="display: none;"
+>
+
+    <div class="modal comments-modal">
+
+        <div class="modal-header">
+
+            <div>
+
+                <p class="section-label">
+                    DISCUSSION
+                </p>
+
+                <h2 id="commentsTrackTitle">
+                    Commentaires
+                </h2>
+
+            </div>
+
+
+            <button
+                id="closeCommentsModal"
+                type="button"
+                class="modal-close"
+                title="Fermer"
+            >
+                ✕
+            </button>
+
+        </div>
+
+
+        <!-- LISTE DES COMMENTAIRES -->
+        <div
+            id="commentsList"
+            class="comments-list"
+        >
+
+            <p class="no-comments">
+                Aucun commentaire pour le moment.
+            </p>
+
+        </div>
+
+
+        <!-- AJOUTER UN COMMENTAIRE -->
+        <div class="comment-form">
+
+            <textarea
+                id="commentInput"
+                placeholder="Écrivez votre commentaire..."
+                maxlength="500"
+            ></textarea>
+
+
+            <div class="comment-form-bottom">
+
+                <span id="commentCounter">
+                    0 / 500
+                </span>
+
+                <button
+                    id="sendCommentButton"
+                    type="button"
+                >
+                    💬 Envoyer
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ============================= -->
+<!-- NOTIFICATIONS -->
+<!-- ============================= -->
+<div
+    id="toastContainer"
+    class="toast-container"
+>
+</div>
+
+
+<!-- ============================= -->
+<!-- JAVASCRIPT PRINCIPAL -->
+<!-- ============================= -->
+<script src="script.js"></script>
+```
+
+</body>
+</html>
